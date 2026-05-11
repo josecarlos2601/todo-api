@@ -1,0 +1,100 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API To-Do List",
+    "description": "API REST para gerenciamento de tarefas usando Node.js, Express e Prisma.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Servidor local"
+    }
+  ],
+  "paths": {
+    "/tasks": {
+      "get": {
+        "summary": "Listar todas as tarefas",
+        "tags": ["Tasks"],
+        "responses": {
+          "200": {
+            "description": "Lista de tarefas retornada com sucesso"
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar nova tarefa",
+        "tags": ["Tasks"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" }
+                },
+                "required": ["title"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tarefa criada com sucesso"
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "put": {
+        "summary": "Atualizar tarefa",
+        "tags": ["Tasks"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "done": { "type": "boolean" }
+                },
+                "required": ["done"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tarefa atualizada com sucesso"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir tarefa",
+        "tags": ["Tasks"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tarefa removida com sucesso"
+          }
+        }
+      }
+    }
+  }
+}
